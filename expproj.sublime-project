@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/wenzhili/nodejs/firstexp",
+			"folder_exclude_patterns": [".*"],
+         	"file_exclude_patterns": [".*"]
+		}
+	]
+}
