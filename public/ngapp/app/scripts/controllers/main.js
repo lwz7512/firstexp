@@ -4,6 +4,8 @@ var mm = angular.module('ngappApp');
 
 mm.controller('MainCtrl', function ($scope, $http, $log) {
     $http.get('/json/classify.json').success(function(data){
+
+      $scope.display = false;//hide the loading text
     	$scope.categories = data.categories;
 
     	//save the categories
