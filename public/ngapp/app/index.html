@@ -19,7 +19,27 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/app.css">
     <!-- endbuild -->
+    
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7cbff608b2b4f329eaa7d3b7d557cd53"></script>
+    <script type="text/javascript">
+      /*
+      document.addEventListener("deviceready", onDeviceReady, false);
+      function onDeviceReady() {
+          alert("onDeviceReady!");
+          document.addEventListener("orientationChanged", updateOrientation);
+      }
+      function updateOrientation(e) {
+          switch (e.orientation) {
+              case 90:
+                  navigator.screenOrientation.set('landscape');
+                  break;
+              case -90:
+                  navigator.screenOrientation.set('landscape');
+                  break;
+          }
+      }
+      */
+    </script>
   </head>
   <body ng-app="ngappApp">
     <!--[if lt IE 7]>

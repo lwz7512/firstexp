@@ -1,31 +1,28 @@
 <div class="header">
     <ul class="nav nav-pills pull-right">
-        <li class="active"><a ng-href="#">Home</a>
-        </li>
-        <li><a href="javascript:window.history.back();">Back</a>
-        </li>
-        <li><a href="javascript:void(0);">About</a>
-        </li>
+        <!--<li class="active"><a ng-href="#">Home</a></li>-->
+        <li><a href="javascript:window.history.back();">Back</a></li>
+        <!--<li><a href="javascript:void(0);">About</a></li>-->
     </ul>
-    <h3 class="text-muted">乐在柏林</h3>
+    <h3 class="text-muted">宜居柏林</h3>
 </div>
 
 
 <ul class="nav nav-list bs-docs-sidenav">
     <li ng-repeat="business in businesses">
         <a href="#/map/{{business.business_id}}">
+            <!-- how to show the loading image first? -->
             <img ng-src="{{business.s_photo_url}}" class="thumb">
             <div class="label-grid">
-                <div class="top-row">
+                <div class="top-row" style="border: 0px solid #e5e5e5;">
                     <span class="item-title">{{business.name}}</span>
-                    <img ng-src="{{business.rating_s_img_url}}" class="rate">
                 </div>
                 <div class="bottom-row">
                     <span>{{business.categories[0]}}</span>
-                    <span class="bottom-right">{{business.address.length>20 ? business.address.substring(0, 20)+'...': business.address}}</span>
+                    <img ng-src="{{business.rating_s_img_url}}" class="bottom-right"></img>
                 </div>
             </div>
-            <span class="glyphicon glyphicon-chevron-right item-high"></span>
+            <span class="glyphicon glyphicon-chevron-right arrow-offset"></span>
         </a>
     </li>
 </ul>

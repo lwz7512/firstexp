@@ -3,6 +3,90 @@
 	{
 		"selected_items":
 		[
+			[
+				"margin-",
+				"margin-top"
+			],
+			[
+				"pa",
+				"padding-bottom"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"on",
+				"onLoad"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"baidu",
+				"baidumap"
+			],
+			[
+				"n",
+				"ngModel"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"bi",
+				"bizid"
+			],
+			[
+				"ma",
+				"margin-bottom"
+			],
+			[
+				"mr",
+				"margin-top"
+			],
+			[
+				"f",
+				"float"
+			],
+			[
+				"bu",
+				"business"
+			],
+			[
+				"su",
+				"SubCategoryCtrl"
+			],
+			[
+				"subc",
+				"subcate"
+			],
+			[
+				"$l",
+				"$log"
+			],
+			[
+				"$r",
+				"$routeParams"
+			],
+			[
+				"$",
+				"$scope"
+			],
+			[
+				"$log",
+				"$log.log	AngularJS"
+			],
+			[
+				"fun",
+				"function"
+			]
 		]
 	},
 	"buffers":
@@ -47,7 +131,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 602.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -64,17 +148,27 @@
 	},
 	"file_history":
 	[
-		"/Users/wenzhili/nodejs/firstexp/app.js",
-		"/Users/wenzhili/nodejs/firstexp/expproj.sublime-project",
-		"/Users/wenzhili/nodejs/untitled.sublime-project",
+		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/views/businesses.html",
+		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/styles/app.css",
+		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/views/bizmap.html",
+		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/views/main.html",
+		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/views/subcategory.html",
+		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/styles/main.css",
 		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/index.html",
 		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/scripts/controllers/main.js",
-		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/views/main.html",
-		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/styles/main.css",
+		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/scripts/directives/baidumap.js",
 		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/scripts/app.js",
+		"/Users/wenzhili/nodejs/firstexp/app.js",
 		"/Users/wenzhili/nodejs/firstexp/public/json/business_bj_cy_sport_0.json",
-		"/Users/wenzhili/nodejs/firstexp/public/json/classify.json",
+		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/views/baidumap.html",
 		"/Users/wenzhili/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/bower_components/bootstrap/dist/css/bootstrap.css",
+		"/Users/wenzhili/nodejs/firstexp/public/json/classify.json",
+		"/Users/wenzhili/nodejs/firstexp/public/ngapp/app/bower_components/angular/angular.js",
+		"/Users/wenzhili/nodejs/firstexp/views/index.jade",
+		"/Users/wenzhili/nodejs/firstexp/expproj.sublime-project",
+		"/Users/wenzhili/nodejs/firstexp/expproj.sublime-workspace",
+		"/Users/wenzhili/nodejs/untitled.sublime-project",
 		"/Users/wenzhili/nodejs/firstexp/public/json/user.json",
 		"/Users/wenzhili/nodejs/firstexp/package.json",
 		"/Users/wenzhili/nodejs/firstexp/public/user.json",
@@ -82,8 +176,7 @@
 		"/Users/wenzhili/nodejs/firstexp/routes/user.js",
 		"/Users/wenzhili/nodejs/firstexp/statics/user.json",
 		"/Users/wenzhili/nodejs/firstexp/routes/index.js",
-		"/Users/wenzhili/nodejs/firstexp/views/layout.jade",
-		"/Users/wenzhili/nodejs/firstexp/views/index.jade"
+		"/Users/wenzhili/nodejs/firstexp/views/layout.jade"
 	],
 	"find":
 	{
@@ -101,6 +194,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"icon-chevron-right",
+			"li",
+			"ul",
+			"li",
+			"business_url"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -179,6 +277,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 264.0,
+	"side_bar_width": 291.0,
 	"status_bar_visible": true
 }
