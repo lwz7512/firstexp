@@ -3,6 +3,9 @@ firstexp
 
 nodejs/express based backend and angular based frontend
 
-1. npm install
-2. bower install
-3. node app
+1. cd public/ngapp
+2. npm install
+3. bower install
+4. grunt build
+5. cd ../..
+6. node app
