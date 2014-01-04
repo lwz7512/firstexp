@@ -19,27 +19,32 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/app.css">
     <!-- endbuild -->
-    
+    <!-- add baidu map script @2013/12/31 -->
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7cbff608b2b4f329eaa7d3b7d557cd53"></script>
-    <script type="text/javascript">
+    <!-- add animation style @2014/01/04-->
+    <style type="text/css">
       /*
-      document.addEventListener("deviceready", onDeviceReady, false);
-      function onDeviceReady() {
-          alert("onDeviceReady!");
-          document.addEventListener("orientationChanged", updateOrientation);
-      }
-      function updateOrientation(e) {
-          switch (e.orientation) {
-              case 90:
-                  navigator.screenOrientation.set('landscape');
-                  break;
-              case -90:
-                  navigator.screenOrientation.set('landscape');
-                  break;
-          }
-      }
+       The animate class is apart of the element and the ng-enter class
+       is attached to the element once the enter animation event is triggered
       */
-    </script>
+      .reveal-animation.ng-enter {
+       -webkit-transition: 1s linear all; /* Safari/Chrome */
+       transition: 1s linear all; /* All other modern browsers and IE10+ */
+       
+       /* The animation preparation code */
+       opacity: 0;
+      }
+       
+      /*
+       Keep in mind that you want to combine both CSS
+       classes together to avoid any CSS-specificity
+       conflicts
+      */
+      .reveal-animation.ng-enter.ng-enter-active {
+       /* The animation code itself */
+       opacity: 1;
+      }
+    </style>
   </head>
   <body ng-app="ngappApp">
     <!--[if lt IE 7]>
@@ -47,7 +52,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="container reveal-animation" ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -69,6 +74,7 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
