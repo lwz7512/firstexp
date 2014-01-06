@@ -3,7 +3,7 @@
 
 .bs-docs-sidenav {
   width: 100%;
-  margin: -20px 10px 10px 0px;/* leave a space from top/bottom*/
+  margin: 0px 10px 10px 0px;/* leave a space from top/bottom*/
   padding: 0;
   background-color: #fff;
   -webkit-border-radius: 6px;
@@ -96,6 +96,7 @@
 }
 
 .loading {
+  margin-top: 30px;
   margin-bottom: 30px;
 }
 
