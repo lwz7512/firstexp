@@ -1,3 +1,6 @@
+<p id="loading" class="loading" ng-show="display">loading...</p>
+<p id="blankresult" class="loading" ng-show="isblank">没有找到商家</p>
+
 <ul class="nav nav-list bs-docs-sidenav">
     <li ng-repeat="business in businesses" selectedonmousedown>
         <a href="#/map/{{business.business_id}}">

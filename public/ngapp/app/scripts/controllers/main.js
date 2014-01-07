@@ -2,13 +2,15 @@
 
 var mm = angular.module('ngappApp');
 
+/* 主页面控制器 */
 mm.controller('MainCtrl', function ($scope, $http, $log) {
     //init state
     $scope.display = true;
 
-    //$http.get('http://good-q.com/MW_CGI.cgi?flag=101&word=%E7%81%AB%E9%94%85').success(function(data){
-      //console.log(data);
-    //});   
+    $http.get('http://good-q.com/MW_CGI.cgi?flag=101&word=%E7%81%AB%E9%94%85')
+    .success(function(data){
+      console.log(data);
+    });   
 
     $http.get('/json/classify.json').success(function(data){
 
@@ -24,7 +26,7 @@ mm.controller('MainCtrl', function ($scope, $http, $log) {
     });
 });
 
-
+/* 子分类控制器 */
 mm.controller('SubCategoryCtrl', function($scope, $routeParams, $log){
   var subcate = $routeParams.subcatename;
   var subcategories = mm['subcategories'];
@@ -37,12 +39,27 @@ mm.controller('SubCategoryCtrl', function($scope, $routeParams, $log){
 	});
 });
 
-
+/* 商家列表控制器 */
 mm.controller('BusinessCtrl', function($scope, $routeParams, $http, $log){
-  $http.get('/json/business_bj_cy_sport_0.json').success(function(data){
+  //init state
+  $scope.display = true;
+  $scope.isblank = false;
+
+  var queryUrl = 'http://good-q.com/MW_CGI.cgi?flag=101&word=' + $routeParams.businesstype;
+  $http.get(queryUrl).success(function(data){
+
+      $scope.display = false;//hide the loading text
+
+      if(!data.businesses){//no result fetched
+        $scope.isblank = true;
+
+        return;
+      }
+
       $scope.businesses = data.businesses;
 
       mm['businesses'] = data.businesses;
+
 
     }).error(function(data){
       $log.log('data load error!');
