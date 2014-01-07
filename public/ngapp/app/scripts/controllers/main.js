@@ -2,19 +2,42 @@
 
 var mm = angular.module('ngappApp');
 
+
+function _localSave(key, value) {
+  if(window.localStorage){
+    window.localStorage.setItem(key, value);
+  }
+}
+
+function _localFetch(key) {
+  if(window.localStorage){
+    return window.localStorage.getItem(key);
+  }
+  return null;
+}
+
+
 /* 主页面控制器 */
 mm.controller('MainCtrl', function ($scope, $http, $log) {
     //init state
-    $scope.display = true;  
+    $scope.display = true;
+
+    var cachedCategories = _localFetch('categories');
+    if(cachedCategories){
+      $scope.display = false;//hide the loading text
+      $scope.categories = cachedCategories;
+      mm['subcategories'] = cachedCategories;//save the categories for next page use
+
+      return;//break the data fetch step!
+    }
 
     $http.get('/json/classify.json').success(function(data){
 
       $scope.display = false;//hide the loading text
-
     	$scope.categories = data.categories;
+      mm['subcategories'] = data.categories;//save the categories for next page use
 
-    	//save the categories
-    	mm['subcategories'] = data.categories;
+      _localSave('categories', data.categories);//cache the list in first load
 
     }).error(function(data){
     	$log.log('data load error!');
