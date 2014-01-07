@@ -1,6 +1,15 @@
 /* Sidenav for Docs
 -------------------------------------------------- */
 
+/* highlite the list item by add class="active" */
+.nav-list > li.active > a,
+.nav-list > li.active > a:hover,
+.nav-list > li.active > a:focus {
+  color: #ffffff;
+  background-color: #428bca;
+}
+
+
 .bs-docs-sidenav {
   width: 100%;
   margin: 0px 10px 10px 0px;/* leave a space from top/bottom*/
@@ -13,6 +22,7 @@
      -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
           box-shadow: 0 1px 4px rgba(0,0,0,.065);
 }
+
 .bs-docs-sidenav > li > a {
     font-size: 21px; /* make the text bigger */
   	display: block;
@@ -32,25 +42,14 @@
      -moz-border-radius: 0 0 6px 6px;
           border-radius: 0 0 6px 6px;
 }
-.bs-docs-sidenav > .active > a {
-  position: relative;
-  z-index: 2;
-  padding: 9px 15px;
-  border: 0;
-  text-shadow: 0 1px 0 rgba(0,0,0,.15);
-  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-          box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-}
+
 /* Chevrons */
 .bs-docs-sidenav .glyphicon-chevron-right {
   float: right;
   margin-right: -6px;
   opacity: .5;
 }
-.bs-docs-sidenav > li > a:hover {
-  background-color: #f5f5f5;
-}
+
 .bs-docs-sidenav a:hover .glyphicon-chevron-right {
   opacity: 1;
 }

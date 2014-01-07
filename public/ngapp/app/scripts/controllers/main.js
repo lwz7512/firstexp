@@ -4,7 +4,11 @@ var mm = angular.module('ngappApp');
 
 mm.controller('MainCtrl', function ($scope, $http, $log) {
     //init state
-    $scope.display = true;    
+    $scope.display = true;
+
+    //$http.get('http://good-q.com/MW_CGI.cgi?flag=101&word=%E7%81%AB%E9%94%85').success(function(data){
+      //console.log(data);
+    //});   
 
     $http.get('/json/classify.json').success(function(data){
 
