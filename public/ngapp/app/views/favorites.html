@@ -1,0 +1,24 @@
+<p id="blankresult" class="loading" ng-show="isblank">没有收藏商家</p>
+
+<ul class="nav nav-list bs-docs-sidenav">
+    <li selectedonmousedown ng-repeat="business in businesses" ng-click="itemClickHandler(business)">
+        <a href="#/map/{{business.business_id}}">
+            <!-- how to show the loading image first? -->
+            <img ng-src="{{business.s_photo_url}}" class="thumb">
+            <div class="label-grid">
+                <div class="top-row" style="border: 0px solid #e5e5e5;">
+                    <span class="item-title">{{business.name}}</span>
+                </div>
+                <div class="bottom-row">
+                    <span>{{business.categories}}</span>
+                    <img ng-src="{{business.rating_s_img_url}}" class="bottom-right"></img>
+                </div>
+            </div>
+            <span class="glyphicon glyphicon-chevron-right arrow-offset"></span>
+        </a>
+    </li>
+</ul>
+
+<div class="footer">
+    <p>♥ from the Runbytech team, QQ:626528719</p>
+</div>

@@ -46,6 +46,32 @@
       }
     </style>
   </head>
+  <script type="text/javascript">
+
+    var mainURL = null;
+
+    //get the complete url... include: /#/
+    window.addEventListener('load', function(){
+        mainURL = window.location.href;
+    });
+
+    //called by native button
+    function doFavorite() {
+
+      var currentURL = window.location.href;
+      var isInMap = (currentURL.indexOf("map") > 0) ? true:false;
+      var scope = angular.element('body').scope();
+      
+      if(isInMap){//emmit favorite event to notify the baidu map controller.
+        scope.$broadcast('dofavorite');
+
+      }{//go favorites page
+        scope.$broadcast('gofavorites', mainURL+"favorites");
+      }
+    }
+
+
+  </script>
   <body ng-app="ngappApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -81,14 +107,20 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/thirdparty/baidumap_v2.0.js"></script>
+    <script src="scripts/thirdparty/baidumap_v2.0.js"></script>-
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/directives/baidumap.js"></script>
     <!-- endbuild -->
 </body>
 </html>
+<!-- >>>> remote debug use, comment this while release in remote server <<<< -->
+
+  <script src="http://192.168.0.103:8081/target/target-script-min.js#anonymous"></script>
+
+<!-- end of remote debug -->

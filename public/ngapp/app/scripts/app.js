@@ -1,5 +1,6 @@
 'use strict';
 
+
 var mainTemplate =  '<p id="loading" class="loading" ng-show="display">loading...</p>';
     mainTemplate +=   '<ul class="nav nav-list bs-docs-sidenav ">';
     mainTemplate +=     '<li ng-repeat="category in categories" selectedonmousedown>';
@@ -28,7 +29,7 @@ var subCategoryTemplate =  '<ul class="nav nav-list bs-docs-sidenav">';
 var businessTemplate =  '<p id="loading" class="loading" ng-show="display">loading...</p>';
     businessTemplate += '<p id="blankresult" class="loading" ng-show="isblank">没有找到商家</p>';
     businessTemplate += '<ul class="nav nav-list bs-docs-sidenav">';
-    businessTemplate +=   '<li ng-repeat="business in businesses" selectedonmousedown>';
+    businessTemplate +=   '<li selectedonmousedown ng-repeat="business in businesses" ng-click="itemClickHandler(business)">';
     businessTemplate +=     '<a href="#/map/{{business.business_id}}">';
     businessTemplate +=       '<img ng-src="{{business.s_photo_url}}" class="thumb">';
     businessTemplate +=       '<div class="label-grid">';
@@ -48,7 +49,8 @@ var businessTemplate =  '<p id="loading" class="loading" ng-show="display">loadi
     businessTemplate +=   '<p>♥ from the Runbytech team, QQ:626528719</p>';
     businessTemplate += '</div>';
 
-var mapTemplate =  '<div id="mapcontainer" baidumap ng-model="business" class="baidu-map"></div>';
+var mapTemplate =  '<div class="alert alert-success" style="width:340px;" ng-show="display">收藏成功！</div>';
+    mapTemplate += '<div id="mapcontainer" baidumap ng-model="business" class="baidu-map"></div>';
     mapTemplate += '<div class="footer">'; 
     mapTemplate +=    '<p>♥ from the Runbytech team, QQ:626528719</p>';
     mapTemplate += '</div>';
@@ -82,6 +84,10 @@ angular.module('ngappApp', [
         template: mapTemplate,
         controller: 'BaiduMapCtrl'
       })
+      .when('/favorites', {
+        templateUrl: 'views/favorites.html',
+        controller: 'FavoritesCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -113,9 +119,10 @@ angular.module('ngappApp').directive('selectedonmousedown', function(){
 
       element.mousedown(function(){
         element.addClass('active');
-        console.log("onmousedown...");
+        //console.log("onmousedown...");
       });
     }
   };
 });
+
 
