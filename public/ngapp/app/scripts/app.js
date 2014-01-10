@@ -33,7 +33,7 @@ var businessTemplate =  '<p id="loading" class="loading" ng-show="display">loadi
     businessTemplate +=     '<a href="#/map/{{business.business_id}}">';
     businessTemplate +=       '<img ng-src="{{business.s_photo_url}}" class="thumb">';
     businessTemplate +=       '<div class="label-grid">';
-    businessTemplate +=         '<div class="top-row" style="border: 0px solid #e5e5e5;">';
+    businessTemplate +=         '<div class="top-row" >';
     businessTemplate +=           '<span class="item-title">{{business.name}}</span>';
     businessTemplate +=         '</div>';
     businessTemplate +=         '<div class="bottom-row">';
@@ -54,6 +54,28 @@ var mapTemplate =  '<div class="alert alert-success" style="width:340px;" ng-sho
     mapTemplate += '<div class="footer">'; 
     mapTemplate +=    '<p>♥ from the Runbytech team, QQ:626528719</p>';
     mapTemplate += '</div>';
+
+var favoritesTemplate =  '<p id="blankresult" class="loading" ng-show="isblank">没有收藏商家</p>';
+    favoritesTemplate += '<ul class="nav nav-list bs-docs-sidenav">';
+    favoritesTemplate +=    '<li selectedonmousedown ng-repeat="business in businesses" ng-click="itemClickHandler(business)">';
+    favoritesTemplate +=      '<a href="#/map/{{business.business_id}}">';
+    favoritesTemplate +=         '<img ng-src="{{business.s_photo_url}}" class="thumb">';
+    favoritesTemplate +=         '<div class="label-grid">';
+    favoritesTemplate +=            '<div class="top-row" >';
+    favoritesTemplate +=              '<span class="item-title">{{business.name}}</span>';
+    favoritesTemplate +=            '</div>';
+    favoritesTemplate +=            '<div class="bottom-row">';
+    favoritesTemplate +=              '<span>{{business.categories}}</span>';
+    favoritesTemplate +=              '<img ng-src="{{business.rating_s_img_url}}" class="bottom-right"></img>';
+    favoritesTemplate +=            '</div>';
+    favoritesTemplate +=          '</div>';
+    favoritesTemplate +=          '<span class="glyphicon glyphicon-chevron-right arrow-offset"></span>';
+    favoritesTemplate +=       '</a>';
+    favoritesTemplate +=    '</li>';
+    favoritesTemplate += '</ul>';
+    favoritesTemplate += '<div class="footer">';
+    favoritesTemplate +=    '<p>♥ from the Runbytech team, QQ:626528719</p>';
+    favoritesTemplate += '</div>';
 
 
 angular.module('ngappApp', [
@@ -85,7 +107,8 @@ angular.module('ngappApp', [
         controller: 'BaiduMapCtrl'
       })
       .when('/favorites', {
-        templateUrl: 'views/favorites.html',
+        //templateUrl: 'views/favorites.html',
+        template: favoritesTemplate,
         controller: 'FavoritesCtrl'
       })
       .otherwise({

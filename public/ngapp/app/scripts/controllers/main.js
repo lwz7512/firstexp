@@ -9,6 +9,12 @@ function remoteLog(msg, obj){
   }, 1000);
 }
 
+function output(string) {
+    var element = document.createElement("div")
+    element.innerHTML = string
+    outputElement.appendChild(element)
+}
+
 
 //TODO, move to a better place...rather than global style...
 function dbQuery(db, where, limit, ondata) {
@@ -129,11 +135,17 @@ mm.controller('BaiduMapCtrl', function($scope, $routeParams, $http, $log, $windo
   var rowcount = 0;
   
   $scope.$on('dofavorite', function(event, args){//listening the index broacast event
+
+    //add the missed create_time field
+    var now = Math.floor(new Date().getTime()/1000);//in second
+    mm['business']['create_time'] = now;
     
     var jsonBusiness = JSON.stringify(mm['business']);
     remoteLog("save: ", jsonBusiness);
 
-    if(typeof Android !== 'undefined') Android.saveFavorite(jsonBusiness);//call native method to save
+    if(typeof Android !== 'undefined') {//check android mobile environment
+      Android.saveFavorite(jsonBusiness);
+    }
 
   });
 
@@ -145,7 +157,7 @@ mm.controller('FavoritesCtrl', function($scope, $routeParams, $http, $log){
 
   $scope.isblank = false;//hide the blank favorites hint text
 
-  if(typeof Android !== 'undefined'){
+  if(typeof Android !== 'undefined'){//check android mobile environment
 
     var favorites = Android.getFavorites();//get data from native
     remoteLog("saved: ", favorites);
