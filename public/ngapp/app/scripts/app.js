@@ -49,7 +49,7 @@ var businessTemplate =  '<p id="loading" class="loading" ng-show="display">loadi
     businessTemplate +=   '<p>♥ from the Runbytech team, QQ:626528719</p>';
     businessTemplate += '</div>';
 
-var mapTemplate =  '<div class="alert alert-success" style="width:340px;" ng-show="display">收藏成功！</div>';
+var mapTemplate =  '<div class="alert alert-success" style="width:340px;text-align:center" ng-click="enterShopPage();">进入商户页</div>';
     mapTemplate += '<div id="mapcontainer" baidumap ng-model="business" class="baidu-map"></div>';
     mapTemplate += '<div class="footer">'; 
     mapTemplate +=    '<p>♥ from the Runbytech team, QQ:626528719</p>';
@@ -84,7 +84,15 @@ angular.module('ngappApp', [
   'ngSanitize',
   'ngRoute',
   'ngAnimate'
-]).config(function ($routeProvider) {
+]).config(function ($routeProvider, $sceDelegateProvider) {
+
+    $sceDelegateProvider
+      .resourceUrlWhitelist([
+        // Allow same origin resource loads.
+        'self',
+        // Allow loading from our assets domain.  Notice the difference between * and **.
+        'http://m.dianping.com/shop/*']);
+
     $routeProvider
       .when('/', {
         //templateUrl: 'views/main.html',
@@ -110,6 +118,10 @@ angular.module('ngappApp', [
         //templateUrl: 'views/favorites.html',
         template: favoritesTemplate,
         controller: 'FavoritesCtrl'
+      })
+      .when('/shop/:business_id', {
+        template: '<div ng-include="templateUrl">正在打开...</div>', 
+        controller: 'DynamicController'
       })
       .otherwise({
         redirectTo: '/'

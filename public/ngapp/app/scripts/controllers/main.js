@@ -126,7 +126,7 @@ mm.controller('BusinessCtrl', function($scope, $routeParams, $http, $log, $windo
 
 
 /*百度地图控制器*/
-mm.controller('BaiduMapCtrl', function($scope, $routeParams, $http, $log, $window){
+mm.controller('BaiduMapCtrl', function($scope, $routeParams, $http, $log){
 
   $scope.business = mm['business'];
 
@@ -148,6 +148,14 @@ mm.controller('BaiduMapCtrl', function($scope, $routeParams, $http, $log, $windo
     }
 
   });
+
+  //open new url in native webview
+  $scope.enterShopPage = function(){
+    var shopUrl = 'http://m.dianping.com/shop/' + businessId;
+    if(typeof Android !== 'undefined') {//check android mobile environment
+      Android.openURL(shopUrl);
+    }
+  };
 
 });
 
@@ -179,5 +187,13 @@ mm.controller('FavoritesCtrl', function($scope, $routeParams, $http, $log){
   
 });
 
+
+/*商户页面控制器*/
+/*暂时没法使用，涉及到跨站请求。。。*/
+/*2014//01/15*/
+mm.controller('DynamicController', function($scope, $routeParams, $sce){
+  var shopUrl = 'http://m.dianping.com/shop/' + $routeParams.business_id;
+  $scope.templateUrl = shopUrl;
+});
 
 
