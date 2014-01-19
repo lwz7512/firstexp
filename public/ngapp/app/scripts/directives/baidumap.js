@@ -29,7 +29,8 @@ angular.module('ngappApp')
 
       	// 百度地图API功能
   	    var map = new BMap.Map(element[0]);
-  	    map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
+  	    map.centerAndZoom(new BMap.Point(longitude, latitude), 18);
+        map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));  //右下角，仅包含缩放按钮
   	    var marker1 = new BMap.Marker(new BMap.Point(longitude, latitude));  // 创建标注
   	    map.addOverlay(marker1);              // 将标注添加到地图中
 

@@ -155,6 +155,12 @@ mm.controller('BaiduMapCtrl', function($scope, $routeParams, $http, $log){
     if(typeof Android !== 'undefined') {//check android mobile environment
       Android.openURL(shopUrl);
     }
+
+    //TODO, if iOS
+    if(typeof iOS !== 'undefined'){
+
+    }
+
   };
 
 });
@@ -176,8 +182,10 @@ mm.controller('FavoritesCtrl', function($scope, $routeParams, $http, $log){
       $scope.$evalAsync($scope.isblank = true);//runtime change the bound property
     }
 
+  }else if(typeof iOS !== 'undefined'){//check ios mobile environment
+
   }else{
-    remoteLog(">>>", "browser environment...");
+    remoteLog(">>>", "current in browser environment...");
   }
 
   $scope.itemClickHandler = function(business){

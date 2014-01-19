@@ -64,27 +64,24 @@
       var scope = angular.element('body').scope();
       
       if(isInMap){//emmit favorite event to notify the baidu map controller.
-        scope.$broadcast('dofavorite');
+
+        if(typeof iOS !== 'undefined') return JSON.stringify(mm['business']);//return result directly for ios client, sweet!
+
+        scope.$broadcast('dofavorite');//notify controller by android client
 
       }{//go favorites page
         scope.$broadcast('gofavorites', mainURL+"favorites");
       }
+
     }
 
 
   </script>
   <body ng-app="ngappApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
+   
     <!-- Add your site or application content here -->
     <div class="container reveal-animation" ng-view=""></div>
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-
+    
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
@@ -108,7 +105,7 @@
 </body>
 </html>
 <!-- >>>> remote debug use, comment this while release in remote server <<<< -->
-<!--
-  <script src="http://192.168.0.103:8081/target/target-script-min.js#anonymous"></script>
--->
+  <!--
+  <script src="http://172.168.1.168:8081/target/target-script-min.js#anonymous"></script>
+
 <!-- end of remote debug -->

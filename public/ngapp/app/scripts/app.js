@@ -49,7 +49,7 @@ var businessTemplate =  '<p id="loading" class="loading" ng-show="display">loadi
     businessTemplate +=   '<p>♥ from the Runbytech team, QQ:626528719</p>';
     businessTemplate += '</div>';
 
-var mapTemplate =  '<div class="alert alert-success" style="width:340px;text-align:center" ng-click="enterShopPage();">进入商户页</div>';
+var mapTemplate =  '<div class="alert alert-success" style="text-align:center" ng-click="enterShopPage();">进入商户页</div>';
     mapTemplate += '<div id="mapcontainer" baidumap ng-model="business" class="baidu-map"></div>';
     mapTemplate += '<div class="footer">'; 
     mapTemplate +=    '<p>♥ from the Runbytech team, QQ:626528719</p>';
