@@ -2,6 +2,9 @@
 
 var mm = angular.module('ngappApp');
 
+var jsbridge;
+
+//--------------------------------------
 function remoteLog(msg, obj){
   setTimeout(function() {
     console.log(">>>>>> "+msg);
@@ -9,33 +12,34 @@ function remoteLog(msg, obj){
   }, 1000);
 }
 
-function output(string) {
-    var element = document.createElement("div")
-    element.innerHTML = string
-    outputElement.appendChild(element)
+window.onerror = function(err) {
+  remoteLog('window.onerror: ', err);
+}
+  
+function connectWebViewJavascriptBridge(callback) {
+  if (window.WebViewJavascriptBridge) {
+    callback(WebViewJavascriptBridge)
+  } else {
+    document.addEventListener('WebViewJavascriptBridgeReady', function() {
+      callback(WebViewJavascriptBridge)
+    }, false)
+  }
 }
 
+//init jsbridge...
+connectWebViewJavascriptBridge(function(bridge) {
+    jsbridge = bridge;
+    //remoteLog('oh, yeah: ', 'jsbridge inited!');
+    jsbridge.init(function(message, responseCallback) {
+      responseCallback(data);
+    })
+});
 
-//TODO, move to a better place...rather than global style...
-function dbQuery(db, where, limit, ondata) {
-  db.select('favorites', '*', where, limit, function(r, q){// on success
-    if(ondata) {
-      var rows = [];
-      var x; for(x=0; x<r.rows.length; x++) { rows.push(r.rows.item(x))};
-      ondata(rows);
-    }
-  }, function(){//on error
-    console.error("query error!");
-  });
-}
-
-function dbInsert(db, item, ondata, onerror){
-  db.insert('favorites', item, ondata, onerror);
-}
+//--------------------------------------
 
 
 /* 主页面控制器 */
-mm.controller('MainCtrl', function ($scope, $http, $log, $window) {
+mm.controller('MainCtrl', function ($scope, $http, $log, $window, $location) {
 
   setTimeout(function(){// delay execuation for weinre: use console, rather than $log;
     //console.log("this can by outputed debug info to weinre...");
@@ -60,6 +64,8 @@ mm.controller('MainCtrl', function ($scope, $http, $log, $window) {
   //listening index.html broadcast event...
   $scope.$on('gofavorites', function(event, args){
     $window.location.href = args;
+    //$location.path('/favorites');
+    //$scope.$apply();
   });
 
 });
@@ -105,7 +111,7 @@ mm.controller('BusinessCtrl', function($scope, $routeParams, $http, $log, $windo
       }
 
       $scope.businesses = data.businesses;
-      //mm['businesses'] = data.businesses;
+      mm['businesses'] = data.businesses;
 
     }).error(function(data){
       $log.log('data load error!');
@@ -147,7 +153,7 @@ mm.controller('BaiduMapCtrl', function($scope, $routeParams, $http, $log){
       Android.saveFavorite(jsonBusiness);
     }
 
-  });
+  });//end of on dofavorite...
 
   //open new url in native webview
   $scope.enterShopPage = function(){
@@ -156,14 +162,15 @@ mm.controller('BaiduMapCtrl', function($scope, $routeParams, $http, $log){
       Android.openURL(shopUrl);
     }
 
-    //TODO, if iOS
+    //TODO, if iOS to open native webview...
     if(typeof iOS !== 'undefined'){
 
     }
 
-  };
+  };//end of enterShopPage
 
-});
+
+});//end of BaiduMapCtrl
 
 
 /*收藏列表控制器*/
@@ -183,7 +190,18 @@ mm.controller('FavoritesCtrl', function($scope, $routeParams, $http, $log){
     }
 
   }else if(typeof iOS !== 'undefined'){//check ios mobile environment
+    if(jsbridge){
+        //>>> call asynchronously method...
+        jsbridge.callHandler('getFavorites', {'foo': 'bar'}, function(response) {
+          remoteLog('JS got response', response);
+          //TODO, asynic update the list...
+          $scope.$evalAsync($scope.businesses = []);
 
+          if($scope.businesses.length==0){//no result
+            $scope.$evalAsync($scope.isblank = true);//runtime change the bound property
+          }
+        });
+      }
   }else{
     remoteLog(">>>", "current in browser environment...");
   }
