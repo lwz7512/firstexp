@@ -118,9 +118,19 @@ mm.controller('BusinessCtrl', function($scope, $routeParams, $http, $log, $windo
     });
 
 
+  /*
+   * save the biz data for:
+   * 1. baidu map display;
+   * 2. mark the shop in baidu map view;
+   */
   $scope.itemClickHandler = function(business){
     mm['business'] = business;//save for map use...
-    //$log.log(business);
+    //add the missed create_time field
+    var now = Math.floor(new Date().getTime()/1000);//in second
+    mm['business']['create_time'] = now;
+    mm['business']['categories'] = business['categories'][0];//only get the first category
+
+    remoteLog("click on: ", business);
   };
 
   //listening index.html broadcast event...
@@ -134,7 +144,7 @@ mm.controller('BusinessCtrl', function($scope, $routeParams, $http, $log, $windo
 /*百度地图控制器*/
 mm.controller('BaiduMapCtrl', function($scope, $routeParams, $http, $log){
 
-  $scope.business = mm['business'];
+  $scope.business = mm['business'];//get the data saved while click on item before.
 
   var businessId = mm['business']['business_id'];
 
@@ -142,10 +152,6 @@ mm.controller('BaiduMapCtrl', function($scope, $routeParams, $http, $log){
   
   $scope.$on('dofavorite', function(event, args){//listening the index broacast event
 
-    //add the missed create_time field
-    var now = Math.floor(new Date().getTime()/1000);//in second
-    mm['business']['create_time'] = now;
-    
     var jsonBusiness = JSON.stringify(mm['business']);
     remoteLog("save: ", jsonBusiness);
 
@@ -162,9 +168,12 @@ mm.controller('BaiduMapCtrl', function($scope, $routeParams, $http, $log){
       Android.openURL(shopUrl);
     }
 
-    //TODO, if iOS to open native webview...
+    //f iOS to open native webview...
     if(typeof iOS !== 'undefined'){
-
+      if(jsbridge){
+        //>>> call asynchronously method...
+        jsbridge.callHandler('openURL', shopUrl);
+      }
     }
 
   };//end of enterShopPage
@@ -192,10 +201,10 @@ mm.controller('FavoritesCtrl', function($scope, $routeParams, $http, $log){
   }else if(typeof iOS !== 'undefined'){//check ios mobile environment
     if(jsbridge){
         //>>> call asynchronously method...
-        jsbridge.callHandler('getFavorites', {'foo': 'bar'}, function(response) {
+        jsbridge.callHandler('getFavorites', null, function(response) {
           remoteLog('JS got response', response);
-          //TODO, asynic update the list...
-          $scope.$evalAsync($scope.businesses = []);
+
+          $scope.$evalAsync($scope.businesses = JSON.parse(response));
 
           if($scope.businesses.length==0){//no result
             $scope.$evalAsync($scope.isblank = true);//runtime change the bound property
